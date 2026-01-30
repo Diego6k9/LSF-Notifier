@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environments
+.env
+.env.*
+.venv/
+venv/
+ENV/
+env/
+
+# Logs
+*.log
+
+# OS/IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Cache
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+# WebDriver manager cache (if created inside project)
+drivers/
+webdriver/
