@@ -1,106 +1,83 @@
 # LSF-Notifier
 
-A Python application that monitors the LSF (Lehre, Studium, Forschung) system for changes in grades and notifies the user with a sound alert when changes are detected.
+A Python tool that monitors the LSF (Lehre, Studium, Forschung) system for grade changes and plays a sound alert when changes are detected.
 
 ## Features
 
-- Automatically logs into the LSF system
-- Navigates to the grades page
-- Periodically checks for changes in grades
-- Plays a sound alert when changes are detected
+- Logs into LSF and navigates to the grades page automatically
+- Periodically checks for changes
+- Plays a sound alert on detected changes
 - Graceful error handling and recovery
-- Configurable monitoring interval and sound settings
+- Configurable check interval and sound settings
 
 ## Requirements
 
 - Python 3.6+
-- Chrome browser
-- ChromeDriver (automatically installed by webdriver-manager)
+- Google Chrome
+- ChromeDriver (installed automatically via `webdriver-manager`)
 
-## Installation
+## Quick start
 
-1. Clone this repository:
+1. Clone and enter the project directory:
    ```
    git clone https://github.com/yourusername/LSF-Notifier.git
    cd LSF-Notifier
    ```
-
-2. Create a virtual environment and activate it:
+2. Create and activate a virtual environment:
    ```
    python -m venv .venv
    .venv\Scripts\activate
    ```
-
-3. Install the required packages:
+3. Install dependencies:
    ```
    pip install -r requirements.txt
    ```
-
-4. Copy the example environment file and fill in your values:
+4. Create your environment file from the example and fill in values:
    ```
    copy .env.example .env
    ```
-   Then edit `.env` and set `USERNAME_LSF`, `PASSWORD_LSF`, and `LSF_LOGIN_PAGE`.
-
-## Configuration
-
-Configuration parameters (including credentials and the login URL) are centralized in `config.py`. Values are read from your `.env` file at runtime; nothing is hard-coded.
-
-Notes:
-- Keep your `.env` file out of version control.
-- The app validates that `USERNAME_LSF`, `PASSWORD_LSF`, and `LSF_LOGIN_PAGE` are present at startup and will exit with a clear message if any are missing.
- - A sample `.env.example` is provided; copy it to `.env` and fill in your values.
-
-The following parameters can be configured in the `.env` file:
-
-- `USERNAME_LSF`: Your LSF username
-- `PASSWORD_LSF`: Your LSF password
-- `LSF_LOGIN_PAGE`: The URL of the LSF login page
-- `CHECK_INTERVAL`: Time between checks in seconds (default: 30)
-- `SOUND_FREQUENCY`: Frequency of the alert sound in Hz (default: 2500)
-- `SOUND_DURATION`: Duration of the alert sound in milliseconds (default: 10000)
-- `WAIT_TIMEOUT`: Maximum time to wait for elements to load in seconds (default: 10)
-- `LOGIN_MAX_WAIT`: Maximum time to wait for post-login completion (MFA/redirects) in seconds (default: 300)
-
-## Usage
-
-1. Edit your `.env` file with your credentials and login page:
-   ```
-   USERNAME_LSF=your_username
-   PASSWORD_LSF=your_password
-   LSF_LOGIN_PAGE='https://lsf.your-university.de/qisserver/rds?state=user&type=0'
-   ```
-
-2. (Optional) Adjust other settings in `.env` (e.g., `CHECK_INTERVAL`, `SOUND_FREQUENCY`, `LOGIN_MAX_WAIT`).
-
-3. Activate your virtual environment (if not already active):
-   ```
-   .venv\Scripts\activate
-   ```
-
-4. Run the script:
+5. Run the script:
    ```
    python monitor_lsf.py
    ```
 
-After starting, the script will:
-1. Open a Chrome browser window
-2. Log into the LSF system (handles MFA/redirects automatically up to `LOGIN_MAX_WAIT`)
-3. Navigate to the grades page
-4. Start monitoring for changes
-5. Play a sound alert when changes are detected
+## Configuration
 
-To stop the script, press `Ctrl+C` in the terminal.
+Configuration is read from `.env` at runtime (see `config.py`). The app validates required values on startup.
+
+- Required
+  - `USERNAME_LSF`: LSF username
+  - `PASSWORD_LSF`: LSF password
+  - `LSF_LOGIN_PAGE`: LSF login URL
+- Optional
+  - `CHECK_INTERVAL`: Seconds between checks (default: 30)
+  - `SOUND_FREQUENCY`: Alert frequency in Hz (default: 2500)
+  - `SOUND_DURATION`: Alert duration in ms (default: 10000)
+  - `WAIT_TIMEOUT`: Element wait timeout in seconds (default: 10)
+  - `LOGIN_MAX_WAIT`: Max time to wait for post-login completion in seconds (default: 300)
+
+Note: `.env.example` is provided. Keep your personal `.env` out of version control.
+
+## Usage
+
+1. Ensure `.env` is configured (see Configuration).
+2. Activate the virtual environment (if not already active):
+   ```
+   .venv\Scripts\activate
+   ```
+3. Start monitoring:
+   ```
+   python monitor_lsf.py
+   ```
+4. Stop with `Ctrl+C` in the terminal.
 
 ## Troubleshooting
 
-If you encounter any issues:
-
-1. Check your LSF credentials in the `.env` file
-2. Ensure you have a stable internet connection
-3. Check the console output for error messages
-4. Make sure Chrome is installed and up to date
+- Verify credentials and `LSF_LOGIN_PAGE` in `.env`
+- Ensure a stable internet connection
+- Check console output for error messages
+- Make sure Chrome is installed and up to date
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT — see `LICENSE` for details.
