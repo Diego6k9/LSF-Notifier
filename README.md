@@ -1,5 +1,7 @@
 # LSF-Notifier
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 A Python tool that monitors the LSF (Lehre, Studium, Forschung) system for grade changes and plays a sound alert when changes are detected.
 
 ## Features
